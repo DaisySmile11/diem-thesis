@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ESP32 OLED Data</title>
+    <script>
+        // Function to periodically fetch data from ESP32 and update the webpage
+        function updateData() {
+            fetch('/getData') // Endpoint to get data from ESP32
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('dataDisplay').innerText = `Data from ESP32: ${data.value}`;
+                })
+                .catch(error => {
+                    console.error('Failed to fetch data:', error);
+                });
+        }
+
+        // Periodically update the data every 5 seconds (adjust as needed)
+        setInterval(updateData, 5000);
+    </script>
+</head>
+<body>
+    <h1>ESP32 OLED Data</h1>
+    <p id="dataDisplay">Data from ESP32: Loading...</p>
+</body>
+</html>
